@@ -6,7 +6,7 @@
         <groupId>com.freedomotic</groupId>
         <artifactId>freedomotic</artifactId>
         <version>5.6-SNAPSHOT</version>
-        <relativePath>../../../</relativePath>
+        <relativePath>../../freedomotic/</relativePath>
   </parent> 
      
   <groupId>com.SteveHobbs</groupId>
@@ -32,7 +32,7 @@
         <freedomotic.framework.required.minor>5</freedomotic.framework.required.minor>
         <freedomotic.framework.required.build>x</freedomotic.framework.required.build>
         <!--don't like this but works for the moment -->
-        <freedomotic.synch.dist.path>../../../framework/freedomotic-core/plugins/</freedomotic.synch.dist.path>
+        <freedomotic.synch.dist.path>../../freedomotic/framework/freedomotic-core/plugins/</freedomotic.synch.dist.path>
         <freedomotic.marketplace.file>${project.artifactId}-${freedomotic.framework.required.major}.${freedomotic.framework.required.minor}.${freedomotic.framework.required.build}-${project.version}.${freedomotic.package.type}</freedomotic.marketplace.file>
         <freedomotic.marketplace.username></freedomotic.marketplace.username>
         <freedomotic.marketplace.password></freedomotic.marketplace.password>
