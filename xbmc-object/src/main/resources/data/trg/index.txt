@@ -1,0 +1,5 @@
+#Filename 		 #TriggerName 			 #ListenedChannel
+null		xbmc change player2			app.event.sensor.protocol.read.xbmc
+null		xbmc change player0			app.event.sensor.protocol.read.xbmc
+null		xbmc change power			app.event.sensor.protocol.read.xbmc
+null		xbmc change player1			app.event.sensor.protocol.read.xbmc
