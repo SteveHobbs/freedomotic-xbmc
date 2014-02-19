@@ -1,0 +1,33 @@
+<com.freedomotic.reactions.Trigger>
+    <name>xbmc change player2</name>
+    <description>XBMC player</description>
+    <channel>app.event.sensor.protocol.read.xbmc</channel>
+    <payload>
+        <payload>
+            <com.freedomotic.reactions.Statement>
+                <logical>AND</logical>
+                <attribute>protocol</attribute>
+                <operand>EQUALS</operand>
+                <value>xbmc</value>
+            </com.freedomotic.reactions.Statement>
+            <com.freedomotic.reactions.Statement>
+                <logical>SET</logical>
+                <attribute>behaviorValue</attribute>
+                <operand>EQUALS</operand>
+                <value>@event.xbmcplayer2</value>
+	   </com.freedomotic.reactions.Statement>
+	   <com.freedomotic.reactions.Statement>
+                <logical>AND</logical>
+                <attribute>function</attribute>
+                <operand>EQUALS</operand>
+                <value>player2</value>
+            </com.freedomotic.reactions.Statement> 
+        </payload>
+    </payload>
+    <hardwareLevel>true</hardwareLevel>
+    <delay>0</delay>
+    <priority>0</priority>
+    <maxExecutions>-1</maxExecutions>
+    <numberOfExecutions>0</numberOfExecutions>
+    <suspensionTime>0</suspensionTime>
+</com.freedomotic.reactions.Trigger>
