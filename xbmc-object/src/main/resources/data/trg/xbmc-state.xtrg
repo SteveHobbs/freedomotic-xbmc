@@ -1,4 +1,4 @@
-<com.freedomotic.reactions.trigger>
+<com.freedomotic.reactions.Trigger>
     <name>XBMC reads its state</name>
     <description>XBMC reads its state</description>
     <channel>app.event.sensor.protocol.read.xbmc</channel>
@@ -24,4 +24,4 @@
     <maxExecutions>-1</maxExecutions>
     <numberOfExecutions>0</numberOfExecutions>
     <suspensionTime>0</suspensionTime>
-</com.freedomotic.reactions.trigger>
+</com.freedomotic.reactions.Trigger>
