@@ -1,0 +1,9 @@
+<com.freedomotic.reactions.Command>
+    <name>XBMC: send play/pause/stop</name>
+    <receiver>app.actuators.mediacenter.xbmc.in</receiver>
+    <description>send a play/pause/stop command to xbmc</description>
+    <hardwareLevel>true</hardwareLevel>
+    <properties>
+        <properties/>
+    </properties>
+</com.freedomotic.reactions.Command>

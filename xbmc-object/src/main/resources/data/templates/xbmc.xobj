@@ -185,9 +185,9 @@
   <actions>
 	<property name="turn on" value="Execute it successfully"/>
     	<property name="turn off" value="Execute it successfully"/>
-    	<property name="set xbmcplayer0" value="Execute it successfully"/>
-	<property name="set xbmcplayer1" value="Execute it successfully"/>
-	<property name="set xbmcplayer2" value="Execute it successfully"/>
+    	<property name="set xbmcplayer0" value="XBMC: send play/pause/stop"/>
+	<property name="set xbmcplayer1" value="XBMC: send play/pause/stop"/>
+	<property name="set xbmcplayer2" value="XBMC: send play/pause/stop"/>
   </actions>
   <triggers>
     <property name="xbmc change power" value="powered"/>
