@@ -5,45 +5,47 @@ import com.freedomotic.api.Protocol;
 import com.freedomotic.app.Freedomotic;
 import com.freedomotic.exceptions.UnableToExecuteException;
 import com.freedomotic.reactions.Command;
-import java.io.IOException;import java.util.List;
+import java.io.IOException;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+public class Xbmc extends Protocol {
 
+    final int POLLING_WAIT;
+    private static final Logger LOG = Logger.getLogger(Xbmc.class.getName());
+    List<XbmcSystem> systemList = new ArrayList<XbmcSystem>();
 
-    public class Xbmc extends Protocol {
-        final int POLLING_WAIT;
-        List<XbmcSystem> systemList = new ArrayList<XbmcSystem>();
-    
     public Xbmc() {
         //every plugin needs a name and a manifest XML file
         super("Xbmc", "/xbmc/xbmc-manifest.xml");
         //read a property from the manifest file below which is in
         //FREEDOMOTIC_FOLDER/plugins/devices/it.freedomotic.xbmc/xbmc.xml
         POLLING_WAIT = configuration.getIntProperty("time-between-reads", 2000); // Not sure if needed?
-     //POLLING_WAIT is the value of the property "time-between-reads" or 2000 millisecs,
+        //POLLING_WAIT is the value of the property "time-between-reads" or 2000 millisecs,
         //default value if the property does not exist in the manifest
         setPollingWait(POLLING_WAIT); //millisecs interval between hardware device status reads
-   
+
     }
-    
+
     @Override
     protected void onStart() {
 
         String thisHost;
         Integer thisPort;
         Thread thisThread;
-         
+
         loadXbmcSystems();
-              
+
         for (XbmcSystem thisXbmcSystem : systemList) {
             thisThread = new Thread(new XbmcThread(thisXbmcSystem), "xbmcPluginThread" + systemList.indexOf(thisXbmcSystem));
             thisXbmcSystem.setXbmcThread(thisThread);
             thisXbmcSystem.getXbmcThread().start();
         }
-   
-        Freedomotic.logger.info("XBMC plugin is started");
+
+        LOG.info("XBMC plugin is started");
     }
-    
+
     @Override
     protected void onShowGui() {
         /**
@@ -71,19 +73,19 @@ import java.util.ArrayList;
         for (XbmcSystem thisXbmcSystem : systemList) {
             thisHost = thisXbmcSystem.getXbmcHost();
             thisState = thisXbmcSystem.getXbmcThread().getState().toString();
-           // System.out.println("Host : "+ thisHost + " State : " + thisState); // just checking to see if any die
+            // System.out.println("Host : "+ thisHost + " State : " + thisState); // just checking to see if any die
         }
-            
+
     }
- 
+
     @Override
     protected void onStop() {
-        Freedomotic.logger.info("XBMC plugin is stopped ");
+        LOG.info("XBMC plugin is stopped ");
     }
 
     @Override
     protected void onCommand(Command c) throws IOException, UnableToExecuteException {
-        Freedomotic.logger.info("XBMC plugin receives a command called " + c.getName()
+        LOG.info("XBMC plugin receives a command called " + c.getName()
                 + " with parameters " + c.getProperties().toString());
     }
 
@@ -98,29 +100,29 @@ import java.util.ArrayList;
         //don't mind this method for now
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    private void loadXbmcSystems(){
-    Integer counter;
-    String xbmcName;
-    String xbmcHost;
-    Integer xbmcPort;
-    String xbmcLocation;
-    String result;
-    Integer numberOfSystems;
-    
-    numberOfSystems = configuration.getTuples().size();
-    
-    for (counter = 0 ; counter < numberOfSystems; counter++) {
-        result = configuration.getTuples().getProperty(counter, "System");
-        if (result != null) { 
-             xbmcHost = configuration.getTuples().getStringProperty(counter, "XBMCHost", "localhost");
-             xbmcPort = configuration.getTuples().getIntProperty(counter, "XBMCPort", 9090);
-             xbmcName = configuration.getTuples().getStringProperty(counter, "System", "none");
-             xbmcLocation =  configuration.getTuples().getStringProperty(counter, "Location", "none");
-             XbmcSystem xbmcSystem = new XbmcSystem(xbmcName, xbmcHost,xbmcPort,xbmcLocation);
-             systemList.add(xbmcSystem);
+
+    private void loadXbmcSystems() {
+        Integer counter;
+        String xbmcName;
+        String xbmcHost;
+        Integer xbmcPort;
+        String xbmcLocation;
+        String result;
+        Integer numberOfSystems;
+
+        numberOfSystems = configuration.getTuples().size();
+
+        for (counter = 0; counter < numberOfSystems; counter++) {
+            result = configuration.getTuples().getProperty(counter, "System");
+            if (result != null) {
+                xbmcHost = configuration.getTuples().getStringProperty(counter, "XBMCHost", "localhost");
+                xbmcPort = configuration.getTuples().getIntProperty(counter, "XBMCPort", 9090);
+                xbmcName = configuration.getTuples().getStringProperty(counter, "System", "none");
+                xbmcLocation = configuration.getTuples().getStringProperty(counter, "Location", "none");
+                XbmcSystem xbmcSystem = new XbmcSystem(xbmcName, xbmcHost, xbmcPort, xbmcLocation);
+                systemList.add(xbmcSystem);
             }
-        }  
-    } 
+        }
+    }
 
 }
